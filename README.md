@@ -2,6 +2,8 @@
 
 Official implementation of **Bidirectional Prototype-Reward co-Evolution for Test-Time Adaptation of Vision-Language Models**.
 
+[[Paper](https://arxiv.org/pdf/2503.09394)] [[arXiv](https://arxiv.org/abs/2503.09394)]
+
 BPRE is a test-time adaptation framework for vision-language models. It evaluates test samples with a multi-dimensional reward module and updates class prototypes through a bidirectional prototype-reward co-evolution process, without requiring source data or target labels.
 
 ## News
@@ -17,6 +19,8 @@ BPRE contains two core components:
 - **Prototype-Reward Interactive Evolution (PRIE)**: uses reward scores to update visual prototypes and uses refined prototypes to improve reward estimation and final prediction.
 
 During testing, BPRE dynamically maintains class-specific visual prototypes and combines CLIP logits, cache logits, and prototype residual refinement for prediction.
+
+Pipeline overview: [PipLine_v2.pdf](asserts/PipLine_v2.pdf)
 
 ## Installation
 
