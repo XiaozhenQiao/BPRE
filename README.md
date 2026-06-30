@@ -20,7 +20,8 @@ BPRE contains two core components:
 
 During testing, BPRE dynamically maintains class-specific visual prototypes and combines CLIP logits, cache logits, and prototype residual refinement for prediction.
 
-Pipeline overview: [PipLine_v2.pdf](asserts/PipLine_v2.pdf)
+![BPRE Pipeline](asserts/PipLine_v2.png)
+
 
 ## Installation
 
