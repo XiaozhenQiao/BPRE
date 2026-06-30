@@ -7,7 +7,7 @@ positive:
   alpha: 8.0
   beta: 5.0
   temperature: 0.1
-  gamma: 0.01
+  gamma: 0.5
   momentum: 0.9
   update_interval: 10
   threshold: 0.15
@@ -17,7 +17,6 @@ positive:
   lambda_conf: 0.2
   lambda_div: 0.2
   align_temperature: 0.01
-  prototype_logit_scale: 100.0
   global_update_threshold: 0.1
   steps: 1
   optimizer_eps: 0.001

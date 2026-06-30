@@ -27,7 +27,6 @@ BPRE_POSITIVE_KEYS = [
     'alpha',
     'beta',
     'temperature',
-    'gamma',
     'momentum',
     'update_interval',
     'threshold',
@@ -37,7 +36,7 @@ BPRE_POSITIVE_KEYS = [
     'lambda_conf',
     'lambda_div',
     'align_temperature',
-    'prototype_logit_scale',
+    'gamma',
     'global_update_threshold',
     'steps',
     'optimizer_eps',
@@ -288,11 +287,11 @@ def compute_cache_logits(image_features, cache_keys, cache_values, alpha, beta, 
     cache_logits = ((-1) * (beta - beta * affinity)).exp() @ cache_values
     return alpha * cache_logits
 
-def compute_prototype_logits(image_features, text_prototypes, visual_prototypes, gamma, logit_scale):
+def compute_prototype_logits(image_features, text_prototypes, visual_prototypes, gamma):
     text_prototypes = F.normalize(text_prototypes, dim=1)
     visual_prototypes = F.normalize(visual_prototypes, dim=1)
     prototype_residual = visual_prototypes - text_prototypes
-    return gamma * logit_scale * image_features @ prototype_residual.T
+    return gamma * image_features @ prototype_residual.T
 
 def visualize_cache(cache, iter):
     with torch.no_grad():
@@ -458,7 +457,6 @@ def run_test_bpre(pos_cfg, lr_cfg, loader, clip_model, clip_weights, dataset_nam
                         prototype_manager.text_prototypes,
                         prototype_manager.visual_prototypes,
                         pos_params['gamma'],
-                        pos_params['prototype_logit_scale'],
                     )
                     loss = avg_entropy(final_logits)
                     
@@ -513,7 +511,6 @@ def run_test_bpre(pos_cfg, lr_cfg, loader, clip_model, clip_weights, dataset_nam
                         prototype_manager.text_prototypes,
                         prototype_manager.visual_prototypes,
                         pos_params['gamma'],
-                        pos_params['prototype_logit_scale'],
                     )
                 
                 acc = cls_acc(final_logits, target.cuda())
